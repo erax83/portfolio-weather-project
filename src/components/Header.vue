@@ -1,5 +1,5 @@
 <template>
-  <div id="hello">
+  <div id="header">
     <h1>Weather Report</h1>
   </div>
 </template>
