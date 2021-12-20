@@ -4,14 +4,12 @@
       <h2>Weather Today</h2>
       <div id="weather-today-right-now">
         <p>{{ todaysDate }}</p>
-        <p>Ort: {{ weatherToday.name }}</p>
-        <p>Land: {{ weatherToday.sys.country }}</p>
-        <img
+        <img id="img-now"
           :src="`https://openweathermap.org/img/wn/${this.weatherToday.weather[0].icon}@2x.png`"
           alt="icon"
         />
-        <p>Väder: {{ weatherToday.weather[0].description }}</p>
-        <p>Temperatur: {{ weatherToday.main.temp }}</p>
+        <p>{{ weatherToday.weather[0].description }}</p>
+        <p>Temperatur: {{ weatherToday.main.temp }} °</p>
         <p>Känns som: {{ weatherToday.main.feels_like }}</p>
         <p>Lufttryck: {{ weatherToday.main.pressure }}</p>
         <p>Luftfuktighet: {{ weatherToday.main.humidity }}</p>
@@ -26,7 +24,7 @@
         <h2>Today Forecast</h2>
         <ul v-for="item in weatherTodayForecast" :key="item.dt_txt">
           <li>
-            {{ item.dt_txt }}
+            {{ item.dt_txt.toLocaleString().substr(11, 5) }}
           </li>
           <li>
             {{ item.main.temp }}
@@ -59,33 +57,35 @@
     <div id="weather-forecast">
       <h2>Weather Forecast</h2>
       <ul v-for="item in weatherForecastFiltered" :key="item.dt_txt">
-        <li v-if="item.dt_txt.slice(11, 20) == '15:00:00'">
-          <img
-            :src="`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`"
-            alt="icon"
-          />
-        </li>
-        <li>
-          {{ item.dt_txt }}
-        </li>
-        <li>
-          {{ item.main.temp }}
-        </li>
-        <li>
-          {{ item.main.humidity }}
-        </li>
-        <li>
-          {{ item.weather[0].description }}
-        </li>
-        <li>
-          {{ item.wind.speed }}
-        </li>
-        <li>
-          {{ item.wind.deg }}
-        </li>
-        <li>
-          {{ item.wind.gust }}
-        </li>
+        <div>
+          <li v-if="item.dt_txt.slice(11, 20) == '15:00:00'">
+            <img
+              :src="`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`"
+              alt="icon"
+            />
+          </li>
+          <li>
+            {{ item.dt_txt }}
+          </li>
+          <li>
+            {{ item.main.temp }}
+          </li>
+          <li>
+            {{ item.main.humidity }}
+          </li>
+          <li>
+            {{ item.weather[0].description }}
+          </li>
+          <li>
+            {{ item.wind.speed }}
+          </li>
+          <li>
+            {{ item.wind.deg }}
+          </li>
+          <li>
+            {{ item.wind.gust }}
+          </li>
+        </div>
       </ul>
     </div>
   </div>
@@ -172,4 +172,9 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+#img-now {
+  width: 200px;
+  padding: 0;
+}
+</style>

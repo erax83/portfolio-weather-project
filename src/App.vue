@@ -24,8 +24,10 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  /* margin-top: 60px; */
+  color: #2c3e50; 
+  /* color: #1c1c1e; */
+  line-height: 1.4;
+  margin: 0px;
 }
 
 .grid-container {
@@ -36,6 +38,7 @@ export default {
   grid-row-start: 0;
   grid-row-end: 1;
   background: yellow;
+  margin: 0px;
 }
 
 .weather {
