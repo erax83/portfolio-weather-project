@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
-    <Header />
-    <Weather />
+  <div id="app" class="grid-container" >
+    <Header class="header"/>
+    <Weather class="weather"/>
   </div>
 </template>
 
@@ -25,7 +25,23 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /* margin-top: 60px; */
+}
+
+.grid-container {
+  grid-template-rows: 100px 1fr;
+}
+
+.header {
+  grid-row-start: 0;
+  grid-row-end: 1;
+  background: yellow;
+}
+
+.weather {
+  grid-row-start: 1;
+  grid-row-end: 2;
+  background: lightblue;
 }
 
 ul {
