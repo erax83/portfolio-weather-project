@@ -27,11 +27,13 @@ export default {
   color: #2c3e50; 
   /* color: #1c1c1e; */
   line-height: 1.4;
-  margin: 0px;
+  margin: auto;
+  max-width: 1000px;
 }
 
 .grid-container {
-  grid-template-rows: 100px 1fr;
+  display: grid;
+  grid-template-rows: 500px 1fr;
 }
 
 .header {
@@ -44,7 +46,14 @@ export default {
 .weather {
   grid-row-start: 1;
   grid-row-end: 2;
-  background: lightblue;
+}
+
+h1 {
+  font-size: 1.3em;
+}
+
+h2 {
+  font-size: 1.2em;
 }
 
 ul {

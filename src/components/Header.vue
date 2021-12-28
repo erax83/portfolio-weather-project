@@ -1,8 +1,11 @@
 <template>
   <div id="header">
-    <h1>Local Weather Report</h1>
-    <div>
-      <h2><img src="@/assets/map.png" alt="map-pointer" class="map-pointer" /> {{ city }}, {{ country }}</h2>
+    <h1 id="title">Local Weather Report</h1>
+    <div id="place">
+      <h2>
+        <img src="@/assets/map.png" alt="map-pointer" class="map-pointer" />
+        {{ city }}, {{ country }}
+      </h2>
     </div>
   </div>
 </template>
@@ -43,7 +46,21 @@ export default {
 </script>
 
 <style scoped>
+#header {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
 .map-pointer {
   width: 18px;
+}
+
+#title {
+  float: left;
+}
+
+#place {
+  float: right;
 }
 </style>
