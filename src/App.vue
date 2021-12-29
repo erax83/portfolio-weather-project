@@ -26,7 +26,7 @@ export default {
   text-align: center;
   color: #2c3e50; 
   /* color: #1c1c1e; */
-  line-height: 1.4;
+  line-height: 1em;
   margin: auto;
   max-width: 1000px;
 }

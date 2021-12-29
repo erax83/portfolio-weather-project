@@ -1,7 +1,8 @@
 <template>
   <div class="weather-info">
     <div id="weather-today">
-      <h2>Todays Weather, {{ todaysDate }}</h2>
+      <h2 class="today-headline">Todays Weather, {{ todaysDate }}</h2>
+      <br />
       <div id="weather-today-right-now">
         <img
           id="img-now"
@@ -26,12 +27,18 @@
           <li>
             {{ item.dt_txt.toLocaleString().substr(11, 5) }}
           </li>
-          <li>{{ item.main.temp }} °</li>
           <li>
-            {{ item.main.humidity }}
+            <img
+              :src="`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`"
+              alt="icon"
+            />
           </li>
           <li>
             {{ item.weather[0].description }}
+          </li>
+          <li>{{ item.main.temp }} °</li>
+          <li>
+            {{ item.main.humidity }}
           </li>
           <li>
             {{ item.wind.speed }}
@@ -42,17 +49,11 @@
           <li>
             {{ item.wind.gust }}
           </li>
-          <li>
-            <img
-              :src="`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`"
-              alt="icon"
-            />
-          </li>
         </ul>
       </div>
     </div>
 
-    <div id="weather-forecast">
+    <!-- <div id="weather-forecast">
       <h2>Weather Forecast</h2>
       <div
         v-for="item in weatherForecastFiltered"
@@ -74,7 +75,7 @@
               {{ item.weather[0].description }}
             </li>
             <li>
-              {{ item.dt_txt.slice(0, 10) }}
+              <b>{{ item.dt_txt.slice(0, 10) }}</b>
             </li>
             <li>{{ item.main.temp }} °</li>
           </div>
@@ -91,10 +92,10 @@
           </div>
         </ul>
       </div>
-    </div>
+    </div> -->
 
     <div id="weather-forecast">
-      <h2>Weather Forecast</h2>
+      <h2 class="forecast-headline">Weather Forecast</h2>
       <table
         v-for="item in weatherForecastFiltered"
         :key="item.dt_txt"
@@ -105,39 +106,33 @@
           class="forecast-wrapper"
         >
           <tr class="box-one">
-            <td>
-              <img class="icon-img"
-                :src="`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`"
-                alt="icon"
-              />
-            </td>
-            <td>
-              {{ item.weather[0].description }}
-            </td>
-            <td>
-              {{ item.dt_txt.slice(0, 10) }}
-            </td>
-            <td>{{ item.main.temp }} °</td>
-            <td>
-              {{ item.main.humidity }}
-            </td>
-            <td>
-              {{ item.wind.speed }}
-            </td>
-            <td>
-              {{ item.wind.deg }}
-            </td>
-          </tr>
-          <tr>
-            <td>
-              {{ item.main.humidity }}
-            </td>
-            <td>
-              {{ item.wind.speed }}
-            </td>
-            <td>
-              {{ item.wind.deg }}
-            </td>
+            <div class="forecast-row-left">
+              <td>
+                <img
+                  class="icon-img"
+                  :src="`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`"
+                  alt="icon"
+                />
+              </td>
+              <td>
+                <div>
+                  <b>{{ item.dt_txt.slice(0, 10) }}</b>
+                </div>
+                <div>{{ item.weather[0].description }}</div>
+              </td>
+            </div>
+            <div class="forecast-row-right">
+              <td>{{ item.main.temp }} °</td>
+              <td>
+                {{ item.main.humidity }}
+              </td>
+              <td>
+                {{ item.wind.speed }}
+              </td>
+              <td>
+                {{ item.wind.deg }}
+              </td>
+            </div>
           </tr>
         </tbody>
       </table>
@@ -231,16 +226,47 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+img {
+  background: lightgray;
+  border-radius: 5em;
+}
+
+.today-headline {
+  float: left;
+}
+
+.forecast-headline {
+  float: left;
+}
+table {
+  width: 100%;
+}
+
+td {
+  height: 3.5em;
+  vertical-align: middle;
+}
 /* #img-now {
   width: 150px;
   padding: 0;
 } */
-#weather-forecast {
-  background: lightcyan;
+/* #weather-forecast {
+  background: lightgrey;
+} */
+.forecast-row-left {
+  float: left;
+}
+/* .date-weather-cluster {
+  margin-bottom: 6px;
+} */
+.forecast-row-right {
+  float: right;
+  margin-top: 6px;
 }
 
 .icon-img {
   width: 2.5em;
+  margin-right: 20px;
 }
 
 /* .forecast-wrapper {
