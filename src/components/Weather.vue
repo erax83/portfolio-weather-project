@@ -21,14 +21,15 @@
         <p>Sunset: {{ weatherToday.sys.sunset }}</p>
       </div>
 
-      <div id="weather-today-forecast">
-        <h2>Today Forecast</h2>
+      <!-- <div id="weather-today-forecast">
+        <h2>Todays Forecast</h2>
         <ul v-for="item in weatherTodayForecast.slice(0, 6)" :key="item.dt_txt">
           <li>
             {{ item.dt_txt.toLocaleString().substr(11, 5) }}
           </li>
           <li>
             <img
+              class="icon-img"
               :src="`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`"
               alt="icon"
             />
@@ -50,6 +51,48 @@
             {{ item.wind.gust }}
           </li>
         </ul>
+      </div>
+    </div> -->
+
+      <div id="weather-today-forecast">
+        <h2>Todays Forecast</h2>
+        <table
+          id="forecast-today-list"
+          v-for="item in weatherTodayForecast.slice(0, 6)"
+          :key="item.dt_txt"
+        >
+          <tbody class="forecast-today-wrapper">
+            <tr class="box-one">
+              <div class="forecast-row-left">
+                <td>
+                  <img
+                    class="icon-img"
+                    :src="`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`"
+                    alt="icon"
+                  />
+                </td>
+                <td>
+                  <div class="date-time">
+                    <b>{{ item.dt_txt.toLocaleString().substr(11, 5) }}</b>
+                  </div>
+                  <div>{{ item.weather[0].description }}</div>
+                </td>
+              </div>
+              <div class="forecast-row-right">
+                <td>
+                  <img class="data-img" src="@/assets/celsius.png" alt="bla" />
+                </td>
+                <td>{{ item.main.temp }} °</td>
+                <td>
+                  {{ item.main.humidity }}
+                </td>
+                <td>
+                  {{ item.wind.speed }}
+                </td>
+              </div>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
@@ -115,13 +158,16 @@
                 />
               </td>
               <td>
-                <div>
+                <div class="date-time">
                   <b>{{ item.dt_txt.slice(0, 10) }}</b>
                 </div>
                 <div>{{ item.weather[0].description }}</div>
               </td>
             </div>
             <div class="forecast-row-right">
+              <td>
+                <img class="data-img" src="@/assets/celsius.png" alt="bla" />
+              </td>
               <td>{{ item.main.temp }} °</td>
               <td>
                 {{ item.main.humidity }}
@@ -226,6 +272,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.date-time {
+  text-align: left;
+}
+
 img {
   background: lightgray;
   border-radius: 5em;
@@ -265,8 +315,12 @@ td {
 }
 
 .icon-img {
-  width: 2.5em;
+  width: 2.3em;
   margin-right: 20px;
+}
+
+.data-img {
+  width: 1em;
 }
 
 /* .forecast-wrapper {
