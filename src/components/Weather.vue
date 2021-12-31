@@ -1,61 +1,28 @@
 <template>
   <div class="weather-info">
     <div id="weather-today">
+      <hr />
       <h2 class="today-headline">Todays Weather, {{ todaysDate }}</h2>
-      <br />
       <div id="weather-today-right-now">
         <img
           id="img-now"
           :src="`https://openweathermap.org/img/wn/${this.weatherToday.weather[0].icon}@2x.png`"
           alt="weathericon"
         />
-        <p>{{ lat }}, {{ long }}</p>
+        <!-- <p>{{ lat }}, {{ long }}</p> -->
         <p>{{ weatherToday.weather[0].description }}</p>
         <h1>Temperature: {{ weatherToday.main.temp }} °</h1>
-        <p>Känns som: {{ weatherToday.main.feels_like }} °</p>
-        <p>Lufttryck: {{ weatherToday.main.pressure }}</p>
-        <p>Luftfuktighet: {{ weatherToday.main.humidity }}</p>
-        <p>Vind hastighet: {{ weatherToday.wind.speed }}</p>
-        <p>Vind deg: {{ weatherToday.wind.deg }}</p>
-        <p>Sunrise: {{ weatherToday.sys.sunrise }}</p>
-        <p>Sunset: {{ weatherToday.sys.sunset }}</p>
+        <p>Feels like: {{ weatherToday.main.feels_like }} °</p>
+        <!-- <p>Lufttryck: {{ weatherToday.main.pressure }}</p> -->
+        <p>Humidity: {{ weatherToday.main.humidity }}</p>
+        <p>Wind speed: {{ weatherToday.wind.speed }}</p>
+        <!-- <p>Vind deg: {{ weatherToday.wind.deg }}</p> -->
+        <!-- <p>Sunrise: {{ weatherToday.sys.sunrise }}</p> -->
+        <!-- <p>Sunset: {{ weatherToday.sys.sunset }}</p> -->
       </div>
-
-      <!-- <div id="weather-today-forecast">
-        <h2>Todays Forecast</h2>
-        <ul v-for="item in weatherTodayForecast.slice(0, 6)" :key="item.dt_txt">
-          <li>
-            {{ item.dt_txt.toLocaleString().substr(11, 5) }}
-          </li>
-          <li>
-            <img
-              class="icon-img"
-              :src="`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`"
-              alt="icon"
-            />
-          </li>
-          <li>
-            {{ item.weather[0].description }}
-          </li>
-          <li>{{ item.main.temp }} °</li>
-          <li>
-            {{ item.main.humidity }}
-          </li>
-          <li>
-            {{ item.wind.speed }}
-          </li>
-          <li>
-            {{ item.wind.deg }}
-          </li>
-          <li>
-            {{ item.wind.gust }}
-          </li>
-        </ul>
-      </div>
-    </div> -->
 
       <div id="weather-today-forecast">
-        <h2>Todays Forecast</h2>
+        <!-- <h2 class="today-forecast-header">Todays Forecast</h2> -->
         <table
           id="forecast-today-list"
           v-for="item in weatherTodayForecast.slice(0, 6)"
@@ -96,49 +63,9 @@
       </div>
     </div>
 
-    <!-- <div id="weather-forecast">
-      <h2>Weather Forecast</h2>
-      <div
-        v-for="item in weatherForecastFiltered"
-        :key="item.dt_txt"
-        id="forecast-list"
-      >
-        <ul
-          v-if="item.dt_txt.slice(11, 20) == '15:00:00'"
-          class="forecast-wrapper"
-        >
-          <div class="box-one">
-            <li>
-              <img
-                :src="`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`"
-                alt="icon"
-              />
-            </li>
-            <li>
-              {{ item.weather[0].description }}
-            </li>
-            <li>
-              <b>{{ item.dt_txt.slice(0, 10) }}</b>
-            </li>
-            <li>{{ item.main.temp }} °</li>
-          </div>
-          <div class="box-two">
-            <li>
-              {{ item.main.humidity }}
-            </li>
-            <li>
-              {{ item.wind.speed }}
-            </li>
-            <li>
-              {{ item.wind.deg }}
-            </li>
-          </div>
-        </ul>
-      </div>
-    </div> -->
-
     <div id="weather-forecast">
-      <h2 class="forecast-headline">Weather Forecast</h2>
+      <hr />
+      <h2 class="forecast-headline">Forecast</h2>
       <table
         v-for="item in weatherForecastFiltered"
         :key="item.dt_txt"
@@ -237,7 +164,11 @@ export default {
               this.weatherForecast[i].dt_txt.substr(0, 10) == this.todaysDate ||
               this.weatherForecast[i].dt_txt.substr(0, 10) == this.tomorrowsDate
             ) {
-              this.weatherTodayForecast.push(this.weatherForecast[i]);
+              if (this.weatherTodayForecast.length < 4) {
+                this.weatherTodayForecast.push(this.weatherForecast[i]);
+              } else {
+                break;
+              }
             } else {
               break;
             }
@@ -276,13 +207,17 @@ export default {
   text-align: left;
 }
 
+.today-forecast-header {
+  text-align: left;
+}
+
 img {
   background: lightgray;
   border-radius: 5em;
 }
 
 .today-headline {
-  float: left;
+  text-align: left;
 }
 
 .forecast-headline {
