@@ -1,11 +1,15 @@
 <template>
   <div id="header">
-    <h1 id="title">Local Weather Report</h1>
+    <!-- <img src="@/assets/headericon.png" alt="symbol"> -->
+    <div>
+      <h1 id="title">Local Weather Report</h1>
+    </div>
+
     <div id="place">
-      <h2>
+      <p>
         <img src="@/assets/map.png" alt="map-pointer" class="map-pointer" />
         {{ city }}, {{ country }}
-      </h2>
+      </p>
     </div>
   </div>
 </template>

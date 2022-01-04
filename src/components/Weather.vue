@@ -1,7 +1,20 @@
 <template>
   <div class="weather-info">
+    <div class="header-info">
+      <!-- <img src="@/assets/headericon.png" alt="symbol"> -->
+      <div>
+        <h1 class="title">Local Weather Report</h1>
+      </div>
+
+      <div class="place">
+        <p>
+          <img src="@/assets/map.png" alt="map-pointer" class="map-pointer" />
+          {{ weatherToday.name }}, {{ weatherToday.sys.country }}
+        </p>
+      </div>
+    </div>
+    <hr>
     <div id="weather-today">
-      <hr />
       <h2 class="today-headline">Todays Weather, {{ todaysDate }}</h2>
       <div id="weather-today-right-now">
         <img
@@ -11,14 +24,13 @@
         />
         <!-- <p>{{ lat }}, {{ long }}</p> -->
         <p>{{ weatherToday.weather[0].description }}</p>
-        <h1>Temperature: {{ weatherToday.main.temp }} °</h1>
-        <p>Feels like: {{ weatherToday.main.feels_like }} °</p>
+        <h1>Temperature (°C): {{ Math.round(weatherToday.main.temp) }} °</h1>
+        <p>Feels like: {{ Math.round(weatherToday.main.feels_like) }} °</p>
         <!-- <p>Lufttryck: {{ weatherToday.main.pressure }}</p> -->
-        <p>Humidity: {{ weatherToday.main.humidity }}</p>
-        <p>Wind speed: {{ weatherToday.wind.speed }}</p>
-        <!-- <p>Vind deg: {{ weatherToday.wind.deg }}</p> -->
-        <!-- <p>Sunrise: {{ weatherToday.sys.sunrise }}</p> -->
-        <!-- <p>Sunset: {{ weatherToday.sys.sunset }}</p> -->
+        <p>Humidity: {{ weatherToday.main.humidity }} %</p>
+        <p>Wind speed: {{ weatherToday.wind.speed }} m/s</p>
+        <p>Sunrise: {{ weatherToday.sys.sunrise }}</p>
+        <p>Sunset: {{ weatherToday.sys.sunset }}</p>
       </div>
 
       <div id="weather-today-forecast">
@@ -49,13 +61,19 @@
                 <td>
                   <img class="data-img" src="@/assets/celsius.png" alt="bla" />
                 </td>
-                <td>{{ item.main.temp }} °</td>
+                <td>{{ Math.round(item.main.temp) }} °</td>
                 <td>
-                  {{ item.main.humidity }}
+                  <img
+                    class="data-img"
+                    src="@/assets/blood-drop.png"
+                    alt="bla"
+                  />
                 </td>
+                <td>{{ item.main.humidity }} %</td>
                 <td>
-                  {{ item.wind.speed }}
+                  <img class="data-img" src="@/assets/wind.png" alt="bla" />
                 </td>
+                <td>{{ item.wind.speed }} m/s</td>
               </div>
             </tr>
           </tbody>
@@ -95,16 +113,15 @@
               <td>
                 <img class="data-img" src="@/assets/celsius.png" alt="bla" />
               </td>
-              <td>{{ item.main.temp }} °</td>
+              <td>{{ Math.round(item.main.temp) }} °</td>
               <td>
-                {{ item.main.humidity }}
+                <img class="data-img" src="@/assets/blood-drop.png" alt="bla" />
               </td>
+              <td>{{ item.main.humidity }} %</td>
               <td>
-                {{ item.wind.speed }}
+                <img class="data-img" src="@/assets/wind.png" alt="bla" />
               </td>
-              <td>
-                {{ item.wind.deg }}
-              </td>
+              <td>{{ item.wind.speed }} m/s</td>
             </div>
           </tr>
         </tbody>
@@ -164,7 +181,7 @@ export default {
               this.weatherForecast[i].dt_txt.substr(0, 10) == this.todaysDate ||
               this.weatherForecast[i].dt_txt.substr(0, 10) == this.tomorrowsDate
             ) {
-              if (this.weatherTodayForecast.length < 4) {
+              if (this.weatherTodayForecast.length < 7) {
                 this.weatherTodayForecast.push(this.weatherForecast[i]);
               } else {
                 break;
@@ -179,7 +196,7 @@ export default {
             if (
               this.weatherForecast[i].dt_txt.substr(0, 10) !==
                 this.todaysDate &&
-              this.dayCounter < 3
+              this.dayCounter < 5
             ) {
               if (
                 this.weatherForecast[i].dt_txt.slice(11, 20) == "09:00:00" ||
@@ -203,6 +220,25 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.header-info {
+  height: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.map-pointer {
+  width: 18px;
+}
+
+.title {
+  float: left;
+}
+
+.place {
+  float: right;
+}
+
 .date-time {
   text-align: left;
 }
@@ -212,7 +248,7 @@ export default {
 }
 
 img {
-  background: lightgray;
+  /* background: lightgray; */
   border-radius: 5em;
 }
 
@@ -231,6 +267,7 @@ td {
   height: 3.5em;
   vertical-align: middle;
 }
+
 /* #img-now {
   width: 150px;
   padding: 0;
