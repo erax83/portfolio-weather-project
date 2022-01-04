@@ -27,8 +27,12 @@
         <h1>Temperature (°C): {{ Math.round(weatherToday.main.temp) }} °</h1>
         <p>Feels like: {{ Math.round(weatherToday.main.feels_like) }} °</p>
         <!-- <p>Lufttryck: {{ weatherToday.main.pressure }}</p> -->
-        <p>Humidity: {{ weatherToday.main.humidity }} %</p>
-        <p>Wind speed: {{ weatherToday.wind.speed }} m/s</p>
+        <p><img
+                    class="data-img"
+                    src="@/assets/blood-drop.png"
+                    alt="bla"
+                  /> Humidity: {{ weatherToday.main.humidity }} %</p>
+        <p><img class="data-img" src="@/assets/wind.png" alt="bla" /> Wind speed: {{ weatherToday.wind.speed }} m/s</p>
         <p>Sunrise: {{ weatherToday.sys.sunrise }}</p>
         <p>Sunset: {{ weatherToday.sys.sunset }}</p>
       </div>
