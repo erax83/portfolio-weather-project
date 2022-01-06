@@ -1,40 +1,50 @@
 <template>
   <div class="weather-info">
     <div class="header-info">
-      <!-- <img src="@/assets/headericon.png" alt="symbol"> -->
-      <div>
-        <h1 class="title">Local Weather Report</h1>
+      <div class="title">
+        <h1>Local Weather Report</h1>
       </div>
+      <br />
 
-      <div class="place">
+      <p class="x">
+        <img src="@/assets/map.png" alt="map-pointer" class="map-pointer" />
+        {{ weatherToday.name }}, {{ weatherToday.sys.country }}
+      </p>
+      <!-- <div class="place">
         <p>
           <img src="@/assets/map.png" alt="map-pointer" class="map-pointer" />
           {{ weatherToday.name }}, {{ weatherToday.sys.country }}
         </p>
-      </div>
+      </div> -->
     </div>
-    <hr>
+    <hr />
     <div id="weather-today">
       <h2 class="today-headline">Todays Weather, {{ todaysDate }}</h2>
       <div id="weather-today-right-now">
         <img
+          class="big-weather-icon weather-icon"
           id="img-now"
           :src="`https://openweathermap.org/img/wn/${this.weatherToday.weather[0].icon}@2x.png`"
           alt="weathericon"
         />
         <!-- <p>{{ lat }}, {{ long }}</p> -->
         <p>{{ weatherToday.weather[0].description }}</p>
-        <h1>Temperature (°C): {{ Math.round(weatherToday.main.temp) }} °</h1>
+        <h3>
+          <img class="data-img" src="@/assets/temp.png" alt="bla" /> Temperature
+          (°C): {{ Math.round(weatherToday.main.temp) }} °
+        </h3>
         <p>Feels like: {{ Math.round(weatherToday.main.feels_like) }} °</p>
         <!-- <p>Lufttryck: {{ weatherToday.main.pressure }}</p> -->
-        <p><img
-                    class="data-img"
-                    src="@/assets/blood-drop.png"
-                    alt="bla"
-                  /> Humidity: {{ weatherToday.main.humidity }} %</p>
-        <p><img class="data-img" src="@/assets/wind.png" alt="bla" /> Wind speed: {{ weatherToday.wind.speed }} m/s</p>
-        <p>Sunrise: {{ weatherToday.sys.sunrise }}</p>
-        <p>Sunset: {{ weatherToday.sys.sunset }}</p>
+        <p>
+          <img class="data-img" src="@/assets/drop.png" alt="bla" /> Humidity:
+          {{ weatherToday.main.humidity }} %
+        </p>
+        <p>
+          <img class="data-img" src="@/assets/wind.png" alt="bla" /> Wind speed:
+          {{ weatherToday.wind.speed }} m/s
+        </p>
+        <!-- <p>Sunrise: {{ weatherToday.sys.sunrise }}</p>
+        <p>Sunset: {{ weatherToday.sys.sunset }}</p> -->
       </div>
 
       <div id="weather-today-forecast">
@@ -49,7 +59,7 @@
               <div class="forecast-row-left">
                 <td>
                   <img
-                    class="icon-img"
+                    class="icon-img weather-icon"
                     :src="`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`"
                     alt="icon"
                   />
@@ -63,15 +73,27 @@
               </div>
               <div class="forecast-row-right">
                 <td>
-                  <img class="data-img" src="@/assets/celsius.png" alt="bla" />
+                  <img class="data-img" src="@/assets/temp.png" alt="bla" />
                 </td>
                 <td>{{ Math.round(item.main.temp) }} °</td>
                 <td>
-                  <img
-                    class="data-img"
-                    src="@/assets/blood-drop.png"
-                    alt="bla"
-                  />
+                  <img class="data-img" src="@/assets/drop.png" alt="bla" />
+                </td>
+                <td>{{ item.main.humidity }} %</td>
+                <td>
+                  <img class="data-img" src="@/assets/wind.png" alt="bla" />
+                </td>
+                <td>{{ item.wind.speed }} m/s</td>
+              </div>
+            </tr>
+            <tr>
+              <div class="forecast-row-small">
+                <td>
+                  <img class="data-img" src="@/assets/temp.png" alt="bla" />
+                </td>
+                <td>{{ Math.round(item.main.temp) }} °</td>
+                <td>
+                  <img class="data-img" src="@/assets/drop.png" alt="bla" />
                 </td>
                 <td>{{ item.main.humidity }} %</td>
                 <td>
@@ -101,7 +123,7 @@
             <div class="forecast-row-left">
               <td>
                 <img
-                  class="icon-img"
+                  class="icon-img weather-icon"
                   :src="`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`"
                   alt="icon"
                 />
@@ -115,11 +137,27 @@
             </div>
             <div class="forecast-row-right">
               <td>
-                <img class="data-img" src="@/assets/celsius.png" alt="bla" />
+                <img class="data-img" src="@/assets/temp.png" alt="bla" />
               </td>
               <td>{{ Math.round(item.main.temp) }} °</td>
               <td>
-                <img class="data-img" src="@/assets/blood-drop.png" alt="bla" />
+                <img class="data-img" src="@/assets/drop.png" alt="bla" />
+              </td>
+              <td>{{ item.main.humidity }} %</td>
+              <td>
+                <img class="data-img" src="@/assets/wind.png" alt="bla" />
+              </td>
+              <td>{{ item.wind.speed }} m/s</td>
+            </div>
+          </tr>
+          <tr>
+            <div class="forecast-row-small">
+              <td>
+                <img class="data-img" src="@/assets/temp.png" alt="bla" />
+              </td>
+              <td>{{ Math.round(item.main.temp) }} °</td>
+              <td>
+                <img class="data-img" src="@/assets/drop.png" alt="bla" />
               </td>
               <td>{{ item.main.humidity }} %</td>
               <td>
@@ -224,8 +262,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.x {
+  display: inline-block;
+  float: left;
+  clear: left;
+}
+
 .header-info {
-  height: 60px;
+  height: 90px;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
@@ -236,6 +280,7 @@ export default {
 }
 
 .title {
+  display: inline-block;
   float: left;
 }
 
@@ -254,6 +299,10 @@ export default {
 img {
   /* background: lightgray; */
   border-radius: 5em;
+}
+
+.weather-icon {
+  background: rgb(216, 216, 216);
 }
 
 .today-headline {
@@ -290,9 +339,17 @@ td {
   margin-top: 6px;
 }
 
+.forecast-row-small {
+  float: left;
+}
+
 .icon-img {
   width: 2.3em;
   margin-right: 20px;
+}
+
+.big-weather-icon {
+  margin: 15px;
 }
 
 .data-img {
@@ -321,4 +378,24 @@ td {
   grid-column-end: 3;
   display: flex;
 } */
+
+@media only screen and (max-width: 390px) {
+  .forecast-row-right {
+    visibility: collapse;
+  }
+
+  .forecast-row-small {
+    visibility: visible;
+  }
+}
+
+@media only screen and (min-width: 391px) {
+  .forecast-row-right {
+    visibility: visible;
+  }
+
+  .forecast-row-small {
+    visibility: collapse;
+  }
+}
 </style>

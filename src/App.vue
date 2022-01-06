@@ -1,7 +1,7 @@
 <template>
-  <div id="app" class="grid-container" >
+  <div id="app" class="grid-container">
     <!-- <Header class="header"/> -->
-    <Weather class="weather"/>
+    <Weather class="weather" />
   </div>
 </template>
 
@@ -19,17 +19,17 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre&family=Sorts+Mill+Goudy&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre&family=Sorts+Mill+Goudy&display=swap");
 
 #app {
   /* font-family: Avenir, Helvetica, Arial, sans-serif; */
-  font-family: 'Sorts Mill Goudy', serif;
-  font-family: 'Abhaya Libre', serif;
+  font-family: "Sorts Mill Goudy", serif;
+  font-family: "Abhaya Libre", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50; 
+  color: #2c3e50;
   /* color: #1c1c1e; */
   line-height: 1em;
   margin: auto;
@@ -54,7 +54,7 @@ export default {
 } */
 
 h1 {
-  font-family: 'Sorts Mill Goudy', serif;
+  font-family: "Sorts Mill Goudy", serif;
   font-size: 1.3em;
 }
 
