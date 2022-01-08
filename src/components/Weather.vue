@@ -1,25 +1,24 @@
 <template>
   <div class="weather-info">
-    <div class="header-info">
+    <header>
       <div class="title">
         <h1>Local Weather Report</h1>
       </div>
       <br />
-
-      <p class="x">
-        <img src="@/assets/map.png" alt="map-pointer" class="map-pointer" />
-        {{ weatherToday.name }}, {{ weatherToday.sys.country }}
-      </p>
-      <!-- <div class="place">
+      <div class="place">
         <p>
           <img src="@/assets/map.png" alt="map-pointer" class="map-pointer" />
           {{ weatherToday.name }}, {{ weatherToday.sys.country }}
         </p>
-      </div> -->
-    </div>
+      </div>
+    </header>
     <hr />
     <div id="weather-today">
-      <h2 class="today-headline">Todays Weather, {{ todaysDate }}</h2>
+      <div class="test">
+        <h2 class="today-headline">Todays Weather, {{ todaysDate }}</h2>
+        <p class="x"><a href="#weather-forecast">Forecast ↓</a></p>
+      </div>
+
       <div id="weather-today-right-now">
         <img
           class="big-weather-icon weather-icon"
@@ -50,7 +49,6 @@
       <div id="weather-today-forecast">
         <!-- <h2 class="today-forecast-header">Todays Forecast</h2> -->
         <table
-          id="forecast-today-list"
           v-for="item in weatherTodayForecast.slice(0, 6)"
           :key="item.dt_txt"
         >
@@ -68,7 +66,9 @@
                   <div class="date-time">
                     <b>{{ item.dt_txt.toLocaleString().substr(11, 5) }}</b>
                   </div>
-                  <div>{{ item.weather[0].description }}</div>
+                  <div class="weather-description">
+                    {{ item.weather[0].description }}
+                  </div>
                 </td>
               </div>
               <div class="forecast-row-right">
@@ -109,7 +109,11 @@
 
     <div id="weather-forecast">
       <hr />
-      <h2 class="forecast-headline">Forecast</h2>
+      <div class="test">
+        <h2 class="forecast-headline">Forecast</h2>
+        <p class="x"><a href="#weather-today">Todays Weather ↑</a></p>
+      </div>
+
       <table
         v-for="item in weatherForecastFiltered"
         :key="item.dt_txt"
@@ -132,7 +136,9 @@
                 <div class="date-time">
                   <b>{{ item.dt_txt.slice(0, 10) }}</b>
                 </div>
-                <div>{{ item.weather[0].description }}</div>
+                <div class="weather-description">
+                  {{ item.weather[0].description }}
+                </div>
               </td>
             </div>
             <div class="forecast-row-right">
@@ -260,15 +266,37 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.test {
+  white-space: nowrap;
+  text-align: left;
+}
+
 .x {
   display: inline-block;
+  border-style: solid;
+  border-color: #2c3e50;
+  border-width: thin;
+  margin-left: 15px;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+  border-radius: 10em;
+}
+
+a {
+  text-decoration: none;
+  color: #2c3e50;
+}
+
+.place {
+  /* display: inline-block; */
   float: left;
   clear: left;
 }
 
-.header-info {
+header {
   height: 90px;
   margin-left: auto;
   margin-right: auto;
@@ -280,12 +308,8 @@ export default {
 }
 
 .title {
-  display: inline-block;
+  /* display: inline-block; */
   float: left;
-}
-
-.place {
-  float: right;
 }
 
 .date-time {
@@ -296,8 +320,11 @@ export default {
   text-align: left;
 }
 
+.weather-description {
+  text-align: left;
+}
+
 img {
-  /* background: lightgray; */
   border-radius: 5em;
 }
 
@@ -306,6 +333,7 @@ img {
 }
 
 .today-headline {
+  display: inline-block;
   text-align: left;
 }
 
@@ -314,10 +342,19 @@ img {
 }
 table {
   width: 100%;
+  margin-bottom: 6px;
+}
+/* 
+tbody {
+  margin-bottom: 20px;
+} */
+
+tr {
+  height: 0.8em;
 }
 
 td {
-  height: 3.5em;
+  height: 1.5em;
   vertical-align: middle;
 }
 
@@ -355,29 +392,6 @@ td {
 .data-img {
   width: 1em;
 }
-
-/* .forecast-wrapper {
-  display: flex;
-  flex-flow: column wrap;
-  height: 375px;
-  justify-content: space-between;
-} */
-/* 
-.box-one {
-  grid-row-start: 0;
-  grid-row-end: 1;
-  grid-column-start: 0;
-  grid-column-end: 3;
-  justify-self: stretch;
-}
-
-.box-two {
-  grid-row-start: 1;
-  grid-row-end: 2;
-  grid-column-start: 0;
-  grid-column-end: 3;
-  display: flex;
-} */
 
 @media only screen and (max-width: 390px) {
   .forecast-row-right {
