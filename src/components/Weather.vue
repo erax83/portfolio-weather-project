@@ -13,6 +13,7 @@
       </div>
     </header>
     <hr />
+
     <main>
       <div id="weather-today">
         <div class="sub-header">
@@ -130,6 +131,7 @@
           </table>
         </div>
       </div>
+
       <div id="weather-forecast">
         <hr />
         <div class="sub-header">
@@ -239,18 +241,27 @@ export default {
       weatherTodayForecast: [],
     };
   },
+  /**
+   * Using geolocation to get users coordinates. The coordinates are used to recieve a local weather report.
+   */
   mounted() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.getPositionByCordinates);
+      navigator.geolocation.getCurrentPosition(this.getPositionByCoordinates);
     }
   },
   methods: {
-    getPositionByCordinates: async function (position) {
+    /**
+     * Store users cordinates. Then calls methods for fetching weather data.
+     */
+    getPositionByCoordinates: async function (position) {
       this.lat = await position.coords.latitude;
       this.long = await position.coords.longitude;
       await this.getWeatherToday();
       await this.getWeatherForecast();
     },
+    /**
+     * Uses Open Weather api to get data of users present local weather.
+     */
     getWeatherToday() {
       axios
         .get(
@@ -258,6 +269,9 @@ export default {
         )
         .then((response) => (this.weatherToday = response.data));
     },
+    /**
+     * Uses Open Weather api to get data of users upcoming local weather, both for the upcoming hours as for the upcoming days.
+     */
     getWeatherForecast: function () {
       axios
         .get(
@@ -270,7 +284,7 @@ export default {
               this.weatherForecast[i].dt_txt.substr(0, 10) == this.todaysDate ||
               this.weatherForecast[i].dt_txt.substr(0, 10) == this.tomorrowsDate
             ) {
-              if (this.weatherTodayForecast.length < 7) {
+              if (this.weatherTodayForecast.length < 5) {
                 this.weatherTodayForecast.push(this.weatherForecast[i]);
               } else {
                 break;
@@ -311,9 +325,10 @@ export default {
 /* Parts of page */
 header {
   height: 90px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
+}
+
+#weather-today-now {
+  margin-bottom: 35px;
 }
 
 /* Images */
@@ -342,24 +357,20 @@ img {
   width: 1em;
 }
 
-/* Links */
+/* Links and buttons*/
 a {
   text-decoration: none;
   color: #2c3e50;
 }
 
-/* Buttons */
 .scroll-button {
   display: inline-block;
   border-style: solid;
   border-color: #2c3e50;
   border-width: thin;
   margin-left: 15px;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  padding-top: 0.2em;
-  padding-bottom: 0.1em;
-  border-radius: 10em;
+  padding: 0.2em 0.5em 0.1em 0.5em;
+  border-radius: 5em;
 }
 
 /* Headlines and data */
@@ -397,7 +408,6 @@ a {
 /* Table */
 table {
   width: 100%;
-  margin-bottom: 6px;
 }
 
 tr {
@@ -407,6 +417,10 @@ tr {
 td {
   height: 1.5em;
   vertical-align: middle;
+}
+
+td img {
+  margin-left: 7px;
 }
 
 .forecast-row-left {
@@ -431,6 +445,18 @@ td {
   .forecast-row-small-screen {
     visibility: visible;
   }
+
+  #weather-today-forecast {
+    margin-bottom: 40px;
+  }
+
+  #weather-today-forecast table {
+    margin-bottom: 16px;
+  }
+
+  #weather-forecast table {
+    margin-bottom: 9px;
+  }
 }
 
 @media only screen and (min-width: 391px) {
@@ -440,6 +466,18 @@ td {
 
   .forecast-row-small-screen {
     visibility: collapse;
+  }
+
+  #weather-today-forecast {
+    margin-bottom: 20px;
+  }
+
+  #weather-today-forecast table {
+    margin-bottom: 8px;
+  }
+
+  #weather-forecast table {
+    margin-bottom: 2px;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="grid-container">
+  <div id="app">
     <Weather class="weather" />
   </div>
 </template>
@@ -35,7 +35,9 @@ html {
   padding: 5px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: "Sorts Mill Goudy", serif;
   font-size: 1.3em;
 }
