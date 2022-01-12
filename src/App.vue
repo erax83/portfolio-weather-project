@@ -33,7 +33,6 @@ html {
   margin: auto;
   max-width: 1000px;
   padding: 5px;
-  background: yellow;
 }
 
 h1,
@@ -51,7 +50,4 @@ h3 {
   font-size: 1.1em;
 }
 
-/* .hr-class {
-  margin-top: 30px;
-} */
 </style>

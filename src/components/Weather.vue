@@ -11,7 +11,7 @@
         </p>
       </div>
     </header>
-    <hr class="hr-class">
+    <hr />
 
     <main>
       <div id="weather-today">
@@ -324,7 +324,7 @@ export default {
 /* Parts of page */
 header {
   height: 90px;
-  margin-bottom: 50px;
+  margin-bottom: 3px;
 }
 
 #weather-today-now {
