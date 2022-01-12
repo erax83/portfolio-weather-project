@@ -4,7 +4,6 @@
       <div id="main-title">
         <h1>Local Weather Report</h1>
       </div>
-      <br />
       <div id="place">
         <p>
           <img id="map-pointer" src="@/assets/map.png" alt="map-pointer" />
