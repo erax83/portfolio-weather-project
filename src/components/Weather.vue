@@ -11,7 +11,7 @@
         </p>
       </div>
     </header>
-    <hr>
+    <hr class="hr-class">
 
     <main>
       <div id="weather-today">
@@ -394,7 +394,6 @@ a {
 #place {
   float: left;
   clear: left;
-  margin-bottom: 0em;
 }
 
 hr {
