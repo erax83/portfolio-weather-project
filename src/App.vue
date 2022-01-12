@@ -51,7 +51,7 @@ h3 {
 }
 
 hr {
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 </style>
