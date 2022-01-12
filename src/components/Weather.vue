@@ -394,6 +394,11 @@ a {
 #place {
   float: left;
   clear: left;
+  margin-bottom: 0em;
+}
+
+hr {
+  text-align: left;
 }
 
 .date-time {
