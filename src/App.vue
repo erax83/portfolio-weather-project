@@ -33,6 +33,7 @@ html {
   margin: auto;
   max-width: 1000px;
   padding: 5px;
+  background: yellow;
 }
 
 h1,

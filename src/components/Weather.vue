@@ -324,7 +324,7 @@ export default {
 /* Parts of page */
 header {
   height: 90px;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 #weather-today-now {
